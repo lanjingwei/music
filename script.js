@@ -163,7 +163,7 @@ const SONGS = [
   {
     id: '1',
     title: "人生八苦",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:28",
     src: "muisc/人生八苦.mp3",
     lyrics: LYRICS_人生八苦
@@ -171,7 +171,7 @@ const SONGS = [
   {
     id: '2',
     title: "听海",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:20",
     src: "muisc/听海.mp3",
     lyrics: LYRICS_听海
@@ -179,7 +179,7 @@ const SONGS = [
   {
     id: '3',
     title: "微光",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:18",
     src: "muisc/微光.mp3",
     lyrics: LYRICS_微光
@@ -187,7 +187,7 @@ const SONGS = [
   {
     id: '4',
     title: "洛神",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:28",
     src: "muisc/洛神.mp3",
     lyrics: LYRICS_洛神
@@ -195,7 +195,7 @@ const SONGS = [
   {
     id: '5',
     title: "洛阳叹",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:07",
     src: "muisc/洛阳叹.mp3",
     lyrics: LYRICS_洛阳叹
@@ -203,7 +203,7 @@ const SONGS = [
   {
     id: '6',
     title: "烟雨行舟",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:58",
     src: "muisc/烟雨行舟.mp3",
     lyrics: LYRICS_烟雨行舟
@@ -211,7 +211,7 @@ const SONGS = [
   {
     id: '7',
     title: "老马",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:29",
     src: "muisc/老马.mp3",
     lyrics: LYRICS_老马
@@ -219,7 +219,7 @@ const SONGS = [
   {
     id: '8',
     title: "远黛姑娘",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:18",
     src: "muisc/远黛姑娘.mp3",
     lyrics: LYRICS_远黛姑娘
@@ -227,7 +227,7 @@ const SONGS = [
   {
     id: '9',
     title: "风说",
-    artist: "原唱",
+    artist: "AI词曲：lion兰",
     durationStr: "03:33",
     src: "muisc/风说.mp3",
     lyrics: LYRICS_风说
