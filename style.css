@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+body {
+  background-color: #1a1a1a;
+  font-family: 'Noto Sans SC', sans-serif;
+  overflow: hidden; /* Prevent scrolling on body */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-lcd {
+  font-family: 'VT323', monospace;
+}
+
+/* Custom Scrollbar for song list */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #2d2d2d; 
+}
+::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777; 
+}
+
+/* Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 3s linear infinite;
+}
+
+/* Utility for hidden elements */
+.hidden {
+  display: none !important;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}

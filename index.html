@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>LAN's Music Hut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'lcd-bg': '#8da890',
+              'lcd-text': '#2d3a2f',
+              'cassette-yellow': '#e8c66a',
+              'metal-dark': '#262626',
+              'button-face': '#e5e5e5',
+            },
+            boxShadow: {
+              'inset-screen': 'inset 2px 2px 5px rgba(0,0,0,0.3), inset -2px -2px 5px rgba(255,255,255,0.05)',
+              'inset-deck': 'inset 4px 4px 10px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(255,255,255,0.05)',
+              'btn-pressed': 'inset 2px 2px 5px rgba(0,0,0,0.3)',
+              'btn-rest': '0 4px 0 #6b7280, 0 6px 5px rgba(0,0,0,0.4)',
+              'btn-active': '0 0 0 #6b7280, inset 0 2px 5px rgba(0,0,0,0.4)',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body>
+    <div class="min-h-screen bg-[#111] flex items-center justify-center p-2 sm:p-4 font-sans select-none">
+      
+      <!-- Main Device Container -->
+      <div class="w-full max-w-[360px] min-h-[95vh] bg-[#282828] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9),inset_0_1px_1px_rgba(255,255,255,0.1)] relative overflow-hidden border-2 sm:border-4 border-[#333] flex flex-col">
+        
+        <!-- Background Texture -->
+        <div class="absolute inset-0 pointer-events-none opacity-20" 
+             style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')">
+        </div>
+
+        <!-- Screws (Corners) -->
+        <div class="absolute top-1.5 left-1.5 w-3 h-3 bg-[#111] rounded-full shadow-[0_1px_0_rgba(255,255,255,0.1)] flex items-center justify-center z-30"><div class="w-full h-0.5 bg-[#444] rotate-45"></div></div>
+        <div class="absolute top-1.5 right-1.5 w-3 h-3 bg-[#111] rounded-full shadow-[0_1px_0_rgba(255,255,255,0.1)] flex items-center justify-center z-30"><div class="w-full h-0.5 bg-[#444] rotate-45"></div></div>
+        <div class="absolute bottom-1.5 left-1.5 w-3 h-3 bg-[#111] rounded-full shadow-[0_1px_0_rgba(255,255,255,0.1)] flex items-center justify-center z-30"><div class="w-full h-0.5 bg-[#444] rotate-45"></div></div>
+        <div class="absolute bottom-1.5 right-1.5 w-3 h-3 bg-[#111] rounded-full shadow-[0_1px_0_rgba(255,255,255,0.1)] flex items-center justify-center z-30"><div class="w-full h-0.5 bg-[#444] rotate-45"></div></div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col h-full">
+            
+            <!-- Header -->
+            <div class="flex justify-between items-center px-3 sm:px-5 pt-4 sm:pt-5 pb-2 sm:pb-3 relative z-10">
+                <div class="flex items-center gap-2 sm:gap-4">
+                  <!-- Avatar -->
+                  <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full p-[2px] sm:p-[3px] bg-gradient-to-b from-zinc-300 via-zinc-500 to-zinc-800 shadow-[0_5px_10px_rgba(0,0,0,0.6)] relative group cursor-pointer">
+                      <div class="w-full h-full rounded-full overflow-hidden border-2 border-[#1a1a1a] relative bg-neutral-800 shadow-inner">
+                          <img 
+                              src="image/lan.jpg" 
+                              alt="Profile" 
+                              class="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity duration-300 scale-110" 
+                          />
+                          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none"></div>
+                      </div>
+                      <div class="absolute -inset-1 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.5)] -z-10"></div>
+                  </div>
+                  
+                  <div class="flex flex-col drop-shadow-2xl space-y-0.5">
+                      <h1 class="font-black text-lg sm:text-2xl leading-none tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-gray-50 via-gray-200 to-gray-500 font-sans" style="text-shadow: 0 3px 8px rgba(0,0,0,0.9), 0 1px 2px rgba(255,255,255,0.3); filter: drop-shadow(0 0 10px rgba(255,255,255,0.2))">
+                          LAN's <span class="text-[9px] sm:text-xs font-bold text-zinc-400 ml-1 tracking-[0.3em] relative -top-0.5" style="text-shadow: 0 2px 6px rgba(0,0,0,0.8)">MUSIC</span>
+                      </h1>
+                      <p class="text-[10px] sm:text-xs text-amber-500 font-bold tracking-[0.15em] sm:tracking-[0.2em] mt-1 uppercase pl-0.5" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9), 0 0 10px rgba(251,191,36,0.5); filter: drop-shadow(0 1px 3px rgba(251,191,36,0.3))">原创音乐小屋</p>
+                  </div>
+                </div>
+          
+                <div class="relative mr-0 sm:mr-1">
+                   <button id="open-btn"
+                      class="group relative bg-gradient-to-b from-[#333] to-[#111] w-12 h-11 sm:w-16 sm:h-14 rounded-md border-t border-white/10 shadow-[0_5px_10px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.1)] active:translate-y-[2px] active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.7)] flex flex-col items-center justify-between pt-1.5 sm:pt-2 pb-1 transition-all duration-100 overflow-hidden"
+                   >
+                      <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-50 pointer-events-none"></div>
+                      
+                      <span class="text-[8px] sm:text-[9px] font-black text-gray-400 tracking-widest group-hover:text-amber-500 transition-colors z-10 relative top-0.5">OPEN</span>
+                      
+                      <div class="w-0 h-0 border-l-[4px] sm:border-l-[5px] border-l-transparent border-r-[4px] sm:border-r-[5px] border-r-transparent border-b-[5px] sm:border-b-[6px] border-b-[#cc3333] drop-shadow-sm z-10 group-active:border-b-[#aa2222] mb-1"></div>
+                      
+                      <div class="absolute top-1.5 right-1.5 w-1 h-1 bg-red-900 rounded-full shadow-[inset_0_0_1px_rgba(0,0,0,0.5)] group-hover:bg-red-500 group-hover:shadow-[0_0_4px_rgba(255,0,0,0.8)] transition-all duration-300"></div>
+                   </button>
+                </div>
+            </div>
+            
+            <div class="px-3 sm:px-5 space-y-4 sm:space-y-5 flex-1 flex flex-col">
+                
+                <!-- LCD Screen -->
+                <div class="w-full bg-[#262626] p-2 sm:p-4 rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] border-b border-white/5 relative group">
+                    <!-- Screen Bezel Shadow -->
+                    <div class="w-full h-32 sm:h-36 bg-[#8da890] rounded shadow-[inset_0_0_20px_rgba(0,0,0,0.4)] p-2 sm:p-3 font-lcd text-[#2d3a2f] relative overflow-hidden border-2 sm:border-4 border-[#758a77] box-border transition-colors duration-1000">
+                      
+                      <!-- Pixel Grid Texture -->
+                      <div class="absolute inset-0 opacity-15 pointer-events-none mix-blend-overlay" 
+                           style="background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px); background-size: 3px 3px">
+                      </div>
+                      
+                      <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(0,0,0,0.25)] pointer-events-none z-10"></div>
+                      <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#2d3a2f]/20 pointer-events-none z-10"></div>
+              
+                      <!-- Top Status Bar -->
+                      <div class="flex justify-between items-center border-b border-[#2d3a2f]/20 pb-0.5 mb-1 text-sm opacity-80 relative z-20">
+                          <!-- Progress Bar -->
+                          <div class="flex-1 flex items-center gap-1.5 mr-2">
+                              <div id="progress-container" class="flex-1 h-1 bg-[#2d3a2f]/20 rounded-full relative cursor-pointer group">
+                                  <div id="progress-bar" class="h-full bg-[#2d3a2f]/60 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                  <div id="progress-handle" class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-[#1a241c] rounded-full shadow-[0_0_4px_rgba(0,0,0,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-grab active:cursor-grabbing" style="left: 0%"></div>
+                              </div>
+                              <span id="progress-time" class="text-[8px] font-bold tracking-wider min-w-[35px]">00:00</span>
+                          </div>
+                          <div class="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] font-bold">
+                              <div class="flex items-center gap-0.5"><i data-lucide="sun" width="9"></i> <span class="tracking-wider hidden sm:inline">25°C</span><span class="tracking-wider sm:hidden">25°</span></div>
+                              <span id="clock-display" class="tracking-widest border px-0.5 border-[#2d3a2f]/30 rounded-sm text-[8px] sm:text-[9px]">12:00</span>
+                              <i data-lucide="battery-medium" width="12"></i>
+                          </div>
+                      </div>
+              
+                      <!-- Main Content Grid -->
+                      <div class="flex h-full relative z-20 pb-2">
+                          
+                          <!-- Left: Song Info -->
+                          <div class="flex flex-col w-20 sm:w-24 text-left pt-1 border-r border-dashed border-[#2d3a2f]/20 mr-1.5 leading-none shrink-0 relative overflow-hidden">
+                              <div class="flex flex-col h-full">
+                                  <span class="text-[8px] font-bold opacity-50 tracking-widest uppercase mb-0.5 flex items-center gap-0.5">
+                                      <i data-lucide="music-2" width="8"></i> TRACK
+                                  </span>
+                                  <div class="relative flex-1 overflow-hidden">
+                                       <div id="song-title" class="font-bold text-sm sm:text-base leading-tight tracking-tighter text-[#1a241c] opacity-90 line-clamp-2 break-words">
+                                           NO TAPE
+                                       </div>
+                                       <div id="song-artist" class="mt-0.5 text-[9px] font-bold opacity-60 uppercase truncate tracking-wide">
+                                           ---
+                                       </div>
+                                  </div>
+                                  
+                                  <div class="mt-auto mb-1">
+                                      <div class="flex items-baseline gap-0.5">
+                                          <span class="text-base sm:text-lg font-bold tracking-tighter opacity-80">MON</span>
+                                          <span class="text-base sm:text-lg font-bold tracking-tighter">01</span>
+                                      </div>
+                                      <div class="text-[7px] sm:text-[8px] font-bold opacity-50 tracking-[0.15em] uppercase border-t border-[#2d3a2f]/20 pt-0.5 mt-0.5">
+                                          STEREO
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+              
+                          <!-- Center: Lyrics Area -->
+                          <div class="flex-1 flex flex-col overflow-hidden relative pl-1">
+                               <div id="lyrics-container" class="flex-1 flex flex-col justify-center items-center gap-0.5 min-h-0 relative -mt-3">
+                                  <!-- Empty State -->
+                                  <div id="lyrics-empty" class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                                       <span class="text-6xl font-bold">---</span>
+                                  </div>
+
+                                  <!-- Playing State (Initially Hidden) -->
+                                  <div id="lyrics-content" class="hidden flex-col items-center w-full">
+                                      <div id="lyric-prev" class="text-xs sm:text-sm font-bold opacity-30 w-full text-center truncate h-4 sm:h-5 transform scale-95"></div>
+                                      <div id="lyric-current" class="text-sm sm:text-base font-bold opacity-90 w-full text-center truncate h-5 sm:h-6 text-[#1a241c] drop-shadow-sm py-0.5 transition-all duration-300 transform scale-105">...</div>
+                                      <div id="lyric-next" class="text-xs sm:text-sm font-bold opacity-30 w-full text-center truncate h-4 sm:h-5 transform scale-95"></div>
+                                  </div>
+
+                                  <!-- Stopped State -->
+                                  <div id="lyrics-stopped" class="hidden flex-col items-center justify-center h-full opacity-30 gap-1">
+                                      <div class="flex gap-2">
+                                          <span class="w-10 h-0.5 bg-[#2d3a2f] rounded-full"></span>
+                                          <span class="w-10 h-0.5 bg-[#2d3a2f] rounded-full"></span>
+                                      </div>
+                                      <span class="text-xs font-bold tracking-widest">STOPPED</span>
+                                  </div>
+                               </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                
+                <!-- Cassette Deck -->
+                <div class="relative w-full h-44 sm:h-56 bg-[#262626] rounded-xl shadow-[inset_0_8px_16px_rgba(0,0,0,0.8),0_1px_0_rgba(255,255,255,0.05)] p-2 sm:p-4 flex items-center justify-center overflow-hidden border-b border-white/5 group">
+                    
+                    <!-- Ambience -->
+                    <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-black/20 z-20"></div>
+            
+                    <!-- THE CASSETTE -->
+                    <div class="relative w-[95%] aspect-[3/2] max-h-full bg-[#1c1c1c] rounded-lg shadow-[0_5px_15px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.15)] flex flex-col items-center overflow-hidden z-10 transition-transform duration-300 transform group-hover:scale-[1.01]">
+                      
+                      <!-- Texture -->
+                      <div class="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
+            
+                      <!-- Screws -->
+                      <div class="absolute top-1.5 left-1.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-900 flex items-center justify-center shadow-[0_1px_1px_rgba(255,255,255,0.1)] border border-black/50"><div class="w-full h-[1px] bg-[#1a1a1a] rotate-45"></div><div class="absolute w-full h-[1px] bg-[#1a1a1a] -rotate-45"></div></div>
+                      <div class="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-900 flex items-center justify-center shadow-[0_1px_1px_rgba(255,255,255,0.1)] border border-black/50"><div class="w-full h-[1px] bg-[#1a1a1a] rotate-45"></div><div class="absolute w-full h-[1px] bg-[#1a1a1a] -rotate-45"></div></div>
+                      <div class="absolute bottom-1.5 left-1.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-900 flex items-center justify-center shadow-[0_1px_1px_rgba(255,255,255,0.1)] border border-black/50"><div class="w-full h-[1px] bg-[#1a1a1a] rotate-45"></div><div class="absolute w-full h-[1px] bg-[#1a1a1a] -rotate-45"></div></div>
+                      <div class="absolute bottom-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-900 flex items-center justify-center shadow-[0_1px_1px_rgba(255,255,255,0.1)] border border-black/50"><div class="w-full h-[1px] bg-[#1a1a1a] rotate-45"></div><div class="absolute w-full h-[1px] bg-[#1a1a1a] -rotate-45"></div></div>
+            
+                      <!-- STICKER LABEL -->
+                      <div class="absolute top-3 left-3 right-3 h-[62%] bg-[#f3cf7a] rounded-[4px] overflow-hidden shadow-[inset_0_0_5px_rgba(0,0,0,0.1)]">
+                          <div class="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/cardboard.png')] mix-blend-multiply pointer-events-none"></div>
+                          
+                          <!-- White Header -->
+                          <div class="absolute top-0 left-0 right-0 h-[28%] bg-white flex flex-col justify-center px-2 sm:px-3 border-b border-neutral-300 shadow-sm z-10">
+                              <div class="text-[5px] sm:text-[6px] font-bold text-neutral-500 tracking-widest">THANKS</div>
+                              <div class="text-[7px] sm:text-[8px] font-black text-neutral-800 tracking-wide uppercase truncate w-[90%]">FUMIAKI MIYAMOTO</div>
+                              <div class="w-full h-[1px] bg-neutral-800 mt-0.5"></div>
+                          </div>
+            
+                          <!-- Yellow Body -->
+                          <div class="absolute inset-0 top-[28%] pt-1 px-2">
+                               <div class="absolute left-1.5 sm:left-2 top-1/2 -translate-y-1/2 flex flex-col leading-none">
+                                  <span class="text-2xl sm:text-3xl font-black text-neutral-800 tracking-tighter opacity-90">A</span>
+                                  <span class="text-[6px] sm:text-[7px] font-bold text-neutral-600 ml-0.5 sm:ml-1 -mt-1">side</span>
+                               </div>
+                               <div class="absolute right-1.5 sm:right-2 bottom-0.5 sm:bottom-1 text-[5px] sm:text-[6px] font-bold text-neutral-600 opacity-70">MADE IN CHINA</div>
+                               <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#000_0.5px,transparent_0.5px)] [background-size:3px_3px] pointer-events-none"></div>
+                          </div>
+            
+                          <!-- CENTRAL WINDOW -->
+                          <div class="absolute top-[58%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70%] h-[40%] bg-[#181818] rounded-full border-[3px] border-[#444] shadow-[inset_0_2px_6px_rgba(0,0,0,1),0_1px_2px_rgba(255,255,255,0.2)] overflow-hidden z-20 flex items-center justify-center px-4">
+                              <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+            
+                              <!-- Left Reel -->
+                              <div class="reel w-12 h-12 rounded-full bg-gradient-to-br from-[#e8e8e8] to-[#cfcfcf] shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.8)] flex items-center justify-center relative z-20">
+                                 <div class="w-8 h-8 bg-[#151515] rounded-full shadow-[inset_0_2px_3px_rgba(0,0,0,0.8)] relative z-10 flex items-center justify-center">
+                                    <!-- Inner Gear Teeth -->
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-45"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-90"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-[135deg]"></div>
+                                    <div class="absolute w-2 h-[1.5px] bg-[#333] left-0 top-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute w-2 h-[1.5px] bg-[#333] right-0 top-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] bottom-0 left-1/2 -translate-x-1/2 rotate-45"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] bottom-0 left-1/2 -translate-x-1/2 rotate-90"></div>
+                                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[#222] rounded-full blur-[1px] opacity-60"></div>
+                                 </div>
+                                 <!-- Teeth (Simplified with pure css) -->
+                                 <div class="absolute w-[6px] h-[10px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] top-1.5"></div>
+                                 <div class="absolute w-[6px] h-[10px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] bottom-1.5"></div>
+                                 <div class="absolute w-[10px] h-[6px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] left-1.5"></div>
+                                 <div class="absolute w-[10px] h-[6px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] right-1.5"></div>
+                              </div>
+            
+                              <!-- Tape Window -->
+                              <div class="flex-1 h-full mx-1 relative flex items-center justify-center overflow-hidden">
+                                   <div class="w-full h-[80%] bg-[#3b281b] shadow-inner relative overflow-hidden">
+                                      <div class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(90deg,transparent,transparent_1px,#000_1px,#000_2px)]"></div>
+                                      <div id="tape-left" class="absolute left-[-10px] top-0 bottom-0 w-14 bg-[#2a1c12] rounded-r-full opacity-90 shadow-lg transition-transform duration-[100s] ease-linear scale-x-100"></div>
+                                      <div id="tape-right" class="absolute right-[-10px] top-0 bottom-0 w-14 bg-[#2a1c12] rounded-l-full opacity-90 shadow-lg transition-transform duration-[100s] ease-linear scale-x-60"></div>
+                                   </div>
+                              </div>
+            
+                              <!-- Right Reel -->
+                              <div class="reel w-12 h-12 rounded-full bg-gradient-to-br from-[#e8e8e8] to-[#cfcfcf] shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.8)] flex items-center justify-center relative z-20">
+                                 <div class="w-8 h-8 bg-[#151515] rounded-full shadow-[inset_0_2px_3px_rgba(0,0,0,0.8)] relative z-10 flex items-center justify-center">
+                                    <!-- Inner Gear Teeth -->
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-45"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-90"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] top-0 left-1/2 -translate-x-1/2 rotate-[135deg]"></div>
+                                    <div class="absolute w-2 h-[1.5px] bg-[#333] left-0 top-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute w-2 h-[1.5px] bg-[#333] right-0 top-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] bottom-0 left-1/2 -translate-x-1/2 rotate-45"></div>
+                                    <div class="absolute w-[1.5px] h-2 bg-[#333] bottom-0 left-1/2 -translate-x-1/2 rotate-90"></div>
+                                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[#222] rounded-full blur-[1px] opacity-60"></div>
+                                 </div>
+                                 <!-- Teeth -->
+                                 <div class="absolute w-[6px] h-[10px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] top-1.5"></div>
+                                 <div class="absolute w-[6px] h-[10px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] bottom-1.5"></div>
+                                 <div class="absolute w-[10px] h-[6px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] left-1.5"></div>
+                                 <div class="absolute w-[10px] h-[6px] bg-gradient-to-b from-[#e0e0e0] to-[#c0c0c0] rounded-[1px] right-1.5"></div>
+                              </div>
+                          </div>
+                      </div>
+            
+                      <!-- Bottom Area -->
+                      <div class="absolute bottom-0 left-0 right-0 h-[32%] px-6 pb-2 flex items-end justify-between">
+                          <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-zinc-600 to-zinc-900 flex items-center justify-center shadow-[0_1px_1px_rgba(255,255,255,0.1)] border border-black/50 scale-75 opacity-60"><div class="w-full h-[1px] bg-[#1a1a1a] rotate-45"></div><div class="absolute w-full h-[1px] bg-[#1a1a1a] -rotate-45"></div></div>
+                          <div class="w-3 h-3 bg-[#0d0d0d] rounded-full shadow-[inset_0_1px_3px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] mb-2"></div>
+                          <div class="w-4 h-4 bg-[#0d0d0d] rounded-full shadow-[inset_0_1px_3px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] mb-4"></div>
+                          <div class="w-[30%] h-10 bg-[#151515] rounded-t-md shadow-[inset_0_2px_5px_rgba(0,0,0,0.8)] border-t border-white/5 relative mb-[-4px]">
+                               <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-5 h-1.5 bg-[#654] rounded-[1px] shadow-sm"></div>
+                               <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-full h-[2px] bg-[#3b281b] opacity-80"></div>
+                          </div>
+                          <div class="w-4 h-4 bg-[#0d0d0d] rounded-full shadow-[inset_0_1px_3px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] mb-4"></div>
+                          <div class="w-3 h-3 bg-[#0d0d0d] rounded-full shadow-[inset_0_1px_3px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] mb-2"></div>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Quote -->
+            <div class="w-full px-3 sm:px-5 mt-auto pt-4 sm:pt-5">
+                <p class="text-left text-[10px] sm:text-[11px] text-zinc-600/80 italic tracking-wide font-serif leading-relaxed" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8), -0.5px -0.5px 1px rgba(255,255,255,0.03); font-style: italic; letter-spacing: 0.08em;">
+                    打动人心的，唯有音乐和文字...
+                </p>
+            </div>
+
+            <!-- Controls -->
+            <div class="w-full px-3 sm:px-5 mt-4 sm:mt-5 pb-4 sm:pb-5 flex items-end justify-between relative z-20">
+                
+                <!-- Buttons Container -->
+                <div class="flex flex-col gap-1.5">
+                  <!-- Label -->
+                  <span class="text-[8px] sm:text-[9px] font-bold text-zinc-500 tracking-[0.2em] uppercase pl-1.5" style="text-shadow: 0 1px 3px rgba(0,0,0,0.6); filter: drop-shadow(0 0 4px rgba(255,255,255,0.1))">Controls</span>
+                  
+                  <div class="flex gap-2 sm:gap-3 bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] p-2 sm:p-3 rounded-2xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.9),0_1px_0_rgba(255,255,255,0.08),0_4px_12px_rgba(0,0,0,0.6)] border border-white/5">
+                    
+                    <!-- Rewind -->
+                    <button id="btn-prev" class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all duration-100 overflow-hidden group bg-gradient-to-b from-slate-100 via-slate-200 to-slate-400 shadow-[0_4px_0_#64748b,0_6px_8px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] active:shadow-[0_1px_0_#64748b,inset_0_3px_8px_rgba(0,0,0,0.3)] active:translate-y-[3px] border-t border-white/40">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-black/10 pointer-events-none"></div>
+                        <div class="absolute inset-0 rounded-xl shadow-[inset_0_-1px_2px_rgba(0,0,0,0.2)] pointer-events-none"></div>
+                        <i data-lucide="rewind" class="opacity-70 text-slate-700 fill-slate-700 drop-shadow-sm relative z-10" width="14"></i>
+                        <span class="text-[6px] sm:text-[7px] font-black text-slate-600 tracking-wider relative z-10" style="text-shadow: 0 1px 1px rgba(255,255,255,0.5)">RW</span>
+                    </button>
+                    
+                    <!-- Stop -->
+                    <button id="btn-stop" class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all duration-100 overflow-hidden group bg-gradient-to-b from-slate-100 via-slate-200 to-slate-400 shadow-[0_4px_0_#64748b,0_6px_8px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] active:shadow-[0_1px_0_#64748b,inset_0_3px_8px_rgba(0,0,0,0.3)] active:translate-y-[3px] border-t border-white/40">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-black/10 pointer-events-none"></div>
+                        <div class="absolute inset-0 rounded-xl shadow-[inset_0_-1px_2px_rgba(0,0,0,0.2)] pointer-events-none"></div>
+                        <i data-lucide="square" class="opacity-70 text-slate-700 fill-slate-700 drop-shadow-sm relative z-10" width="13"></i>
+                        <span class="text-[6px] sm:text-[7px] font-black text-slate-600 tracking-wider relative z-10" style="text-shadow: 0 1px 1px rgba(255,255,255,0.5)">STOP</span>
+                    </button>
+            
+                    <!-- Play/Pause -->
+                    <button id="btn-play" class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all duration-100 overflow-hidden group bg-gradient-to-b from-slate-100 via-slate-200 to-slate-400 shadow-[0_4px_0_#64748b,0_6px_8px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] active:shadow-[0_1px_0_#64748b,inset_0_3px_8px_rgba(0,0,0,0.3)] active:translate-y-[3px] border-t border-white/40">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-black/10 pointer-events-none"></div>
+                        <div class="absolute inset-0 rounded-xl shadow-[inset_0_-1px_2px_rgba(0,0,0,0.2)] pointer-events-none"></div>
+                        <i id="icon-play" data-lucide="play" class="opacity-80 text-slate-700 fill-slate-700 drop-shadow-sm relative z-10" width="14"></i>
+                        <i id="icon-pause" data-lucide="pause" class="opacity-80 text-slate-700 fill-slate-700 drop-shadow-sm relative z-10 hidden" width="14"></i>
+                        <span class="text-[6px] sm:text-[7px] font-black text-slate-600 tracking-wider relative z-10" style="text-shadow: 0 1px 1px rgba(255,255,255,0.5)">PLAY</span>
+                        <div id="led-play" class="absolute top-1 sm:top-1.5 right-1 sm:right-1.5 w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_6px_#4ade80,inset_0_0_2px_rgba(255,255,255,0.8)] animate-pulse hidden"></div>
+                    </button>
+            
+                    <!-- Fast Forward -->
+                    <button id="btn-next" class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all duration-100 overflow-hidden group bg-gradient-to-b from-slate-100 via-slate-200 to-slate-400 shadow-[0_4px_0_#64748b,0_6px_8px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] active:shadow-[0_1px_0_#64748b,inset_0_3px_8px_rgba(0,0,0,0.3)] active:translate-y-[3px] border-t border-white/40">
+                         <div class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-black/10 pointer-events-none"></div>
+                         <div class="absolute inset-0 rounded-xl shadow-[inset_0_-1px_2px_rgba(0,0,0,0.2)] pointer-events-none"></div>
+                         <i data-lucide="fast-forward" class="opacity-70 text-slate-700 fill-slate-700 drop-shadow-sm relative z-10" width="14"></i>
+                         <span class="text-[6px] sm:text-[7px] font-black text-slate-600 tracking-wider relative z-10" style="text-shadow: 0 1px 1px rgba(255,255,255,0.5)">FF</span>
+                    </button>
+                  </div>
+                </div>
+          
+                <!-- Volume Knob -->
+                <div class="relative ml-2 sm:ml-4 flex flex-col items-center justify-center gap-1.5">
+                  <span class="text-[8px] sm:text-[9px] font-bold text-zinc-500 tracking-[0.2em] uppercase" style="text-shadow: 0 1px 3px rgba(0,0,0,0.6); filter: drop-shadow(0 0 4px rgba(255,255,255,0.1))">Volume</span>
+                  
+                  <div id="volume-knob"
+                      class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-zinc-200 to-zinc-400 shadow-[0_5px_15px_rgba(0,0,0,0.6),0_2px_4px_rgba(0,0,0,0.4)] relative flex items-center justify-center cursor-grab active:cursor-grabbing group border border-zinc-500/30 touch-none"
+                      style="transform: rotate(54deg); transition: transform 0.1s ease-out;"
+                  >
+                      <div class="absolute inset-0 rounded-full opacity-40" 
+                           style="background: repeating-conic-gradient(#333 0deg 1deg, transparent 1deg 3deg)"></div>
+                      <div class="absolute inset-0 rounded-full bg-gradient-to-br from-white/90 via-transparent to-transparent opacity-70 pointer-events-none"></div>
+                      <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-zinc-100 to-zinc-300 shadow-[0_2px_4px_rgba(0,0,0,0.3)] border border-zinc-400 relative z-10 flex items-center justify-center">
+                           <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-zinc-100 to-zinc-200 opacity-50"></div>
+                      </div>
+                      <div class="absolute top-1.5 sm:top-2 w-1.5 sm:w-2 h-3 sm:h-4 bg-orange-600 rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)] z-20"></div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Song Selection Modal (Initially Hidden) -->
+        <div id="modal-overlay" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md hidden">
+          <div class="w-full max-w-xs bg-black/40 backdrop-blur-xl border-2 border-white/20 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh] relative animate-in fade-in">
+            
+            <!-- Modal Header -->
+            <div class="bg-white/10 backdrop-blur-md p-3 flex justify-between items-center border-b border-white/20 shadow-lg z-10">
+                <h3 class="text-amber-400 font-bold tracking-wider flex items-center gap-2 text-xs" style="font-family: 'Georgia', 'Times New Roman', serif;">
+                    <i data-lucide="list-music" width="14"></i> 
+                    LAN'S ORIGINAL PLAYLIST
+                </h3>
+                <button id="modal-close" class="text-gray-300 hover:text-white bg-white/10 hover:bg-white/20 p-1 rounded-full transition-colors backdrop-blur-sm">
+                    <i data-lucide="x" width="18"></i>
+                </button>
+            </div>
+    
+            <!-- List -->
+            <div id="song-list" class="overflow-y-auto p-2 space-y-1.5 bg-black/20 backdrop-blur-sm scrollbar-thin">
+                <!-- Songs will be injected here by JS -->
+            </div>
+            
+            <div class="h-2 bg-gradient-to-r from-white/5 via-white/10 to-white/5"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Audio Element -->
+      <audio id="main-audio"></audio>
+      <audio id="sfx-click" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA="></audio>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+    </script>
+</body>
+</html>
